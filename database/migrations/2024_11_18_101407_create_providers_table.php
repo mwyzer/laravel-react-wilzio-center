@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('providers', function (Blueprint $table) {
-            $table->id();
-            $table->providerName();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->string('name'); // Provider name
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 

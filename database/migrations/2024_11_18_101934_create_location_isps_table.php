@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('location_isps', function (Blueprint $table) {
-            $table->id();
-            $table->locationId();
-            $table->ispid();
-            $table->ispType();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade'); // Foreign key for locations
+            $table->foreignId('isp_id')->constrained('isps')->onDelete('cascade'); // Foreign key for ISPs
+            $table->string('isp_type')->nullable(); // Type of ISP (e.g., broadband, fiber)
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 
