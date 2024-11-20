@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('isps', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); // ISP name
             $table->timestamps();
         });
     }

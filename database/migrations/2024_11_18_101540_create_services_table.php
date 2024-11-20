@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reward_types', function (Blueprint $table) {
+        Schema::create('services_table', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->string('name')->unique(); // Name of the reward type
-            $table->text('description')->nullable(); // Optional description of the reward type
             $table->timestamps(); // Created at and updated at timestamps
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reward_types');
+        Schema::dropIfExists('services_table');
     }
 };

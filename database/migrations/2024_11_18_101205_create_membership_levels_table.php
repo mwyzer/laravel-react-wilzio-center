@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('member_levels', function (Blueprint $table) {
+        Schema::create('membership_levels', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->string('name'); // Name of the membership level
             $table->text('description')->nullable(); // Optional description of the level
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('member_levels');
+        Schema::dropIfExists('membership_levels');
     }
 };

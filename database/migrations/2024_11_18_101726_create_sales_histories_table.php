@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales_histories', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade'); // Foreign key for locations table
-            $table->integer('sales_amount')->default(0); // Sales amount for the record
-            $table->timestamp('sales_date')->useCurrent(); // Date of the sale
-            $table->timestamps(); // Created at and updated at timestamps
-        });
+        if (!Schema::hasTable('sales_histories')) {
+            Schema::create('sales_histories', function (Blueprint $table) {
+                $table->id(); // Primary key
+                $table->foreignId('location_id')->constrained()->onDelete('cascade'); // Foreign key
+                $table->integer('sales_amount')->default(0); // Default sales amount
+                $table->timestamp('sales_date')->useCurrent(); // Default current timestamp
+                $table->timestamps(); // Created at and updated at timestamps
+            });
+        }
     }
 
     /**
