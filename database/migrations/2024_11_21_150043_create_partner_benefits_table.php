@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -12,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bonus_settings', function (Blueprint $table) {
+        Schema::create('partner_benefits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('benefit_id')->constrained()->onDelete('cascade'); // Foreign key to benefits table
             $table->foreignId('partner_type_id')->constrained()->onDelete('cascade'); // Foreign key to partner_types table
-            $table->string('bonusType'); // Type of the bonus
-            $table->boolean('enabled')->default(true); // Whether the bonus setting is enabled or not
-            $table->integer('points'); // Points associated with the bonus setting
-            $table->decimal('nominalRequired', 10, 2); // Minimum nominal required for the bonus
-            $table->string('appliesEvery'); // Applies every (e.g., month, year)
+            $table->boolean('enabled')->default(true); // Whether the benefit is enabled or not
             $table->timestamps(); // Created at and updated at timestamps
             $table->timestamp('deleted_at')->nullable(); // Soft delete timestamp
         });
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('partner_benefits');
     }
 };

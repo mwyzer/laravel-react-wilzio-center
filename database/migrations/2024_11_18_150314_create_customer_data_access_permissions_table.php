@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('customer_data_access_permissions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('partner_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_data_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('access_level_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

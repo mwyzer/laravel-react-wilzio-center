@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paspor_data_access_permissions', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_type_id')->constrained()->onDelete('cascade');
-            $table->foreignId('paspor_data_category_id')->constrained()->onDelete('cascade');
-            $table->foreignId('access_level_id')->constrained()->onDelete('cascade');
+            $table->integer('amount');
+            $table->foreignId('invoiceId')->constrained()->onDelete('cascade');
+            $table->foreignId('customerId')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paspor_data_access_permissions');
+        Schema::dropIfExists('payments');
     }
 };

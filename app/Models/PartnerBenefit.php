@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BonusSettings extends Model
+class PartnerBenefit extends Model
 {
     //
     use HasFactory;
-    
-    protected $fillable = [
-        'partner_type_id',
-        'bonus_type',
-        'enabled',
-        'points',
-        'nominal_required',
-        'applies_every',
-    ];
+
+    protected $fillable = ['benefit_id', 'partner_type_id', 'enabled'];
+
+    // Relationship with Benefit
+    public function benefit()
+    {
+        return $this->belongsTo(Benefit::class);
+    }
 
     // Relationship with PartnerType
     public function partnerType()

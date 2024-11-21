@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('benefits', function (Blueprint $table) {
             $table->id();
-            $table->description();
-            $table->timestamps();
+            $table->text('description'); // Description of the benefit
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 

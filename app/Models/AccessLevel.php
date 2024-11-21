@@ -1,26 +1,19 @@
-<?php
+<?php 
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PartnerType extends Model
+class AccessLevel extends Model
 {
-    use HasFactory;
-
     use HasFactory;
 
     protected $fillable = ['name'];
 
-    public function voucherPartnerPrices()
+    public function changeHistoryDataAccessPermissions()
     {
-        return $this->hasMany(VoucherPartnerPrice::class);
-    }
-
-    public function locationPartners()
-    {
-        return $this->hasMany(LocationPartner::class);
+        return $this->hasMany(ChangeHistoryDataAccessPermission::class);
     }
 
     public function customerDataAccessPermissions()
@@ -38,23 +31,8 @@ class PartnerType extends Model
         return $this->hasMany(PasporDataAccessPermission::class);
     }
 
-    public function changeHistoryDataAccessPermissions()
-    {
-        return $this->hasMany(ChangeHistoryDataAccessPermission::class);
-    }
-
     public function dataAccessPermissions()
     {
         return $this->hasMany(DataAccessPermission::class);
-    }
-
-    public function bonusSettings()
-    {
-        return $this->hasMany(BonusSettings::class);
-    }
-
-    public function partnerBenefits()
-    {
-        return $this->hasMany(PartnerBenefit::class);
     }
 }
