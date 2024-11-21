@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('location_partners', function (Blueprint $table) {
             $table->id();
-            $table->name();
-            $table->partnerId();
-            $table->whatsappContact();
-            $table->location();
-            $table->statusReq();
-            $table->accountBalance();
-            $table->customerType();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->integer('partner_type_id');
+            $table->string('status');
+            $table->integer('max_count');
+            $table->integer('filled_count');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partners');
+        Schema::dropIfExists('location_partners');
     }
 };

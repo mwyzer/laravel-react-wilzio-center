@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('location_isps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
-            $table->foreignId('isp_id')->constrained('isps')->onDelete('cascade'); // Foreign key for ISPs
-            $table->string('isp_type')->nullable();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->integer('isp_id');
+            $table->string('isp_type');
+            $table->string('contact_number');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Primary key
             $table->string('name'); // Name of the membership level
             $table->text('description')->nullable(); // Optional description of the level
-            $table->decimal('min_spending', 15, 2); // Minimum spending required for the level
+            $table->integer('min_spending'); // Changed to integer
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

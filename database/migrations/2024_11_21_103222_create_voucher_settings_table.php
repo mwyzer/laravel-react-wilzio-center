@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('voucher_partner_prices', function (Blueprint $table) {
+        Schema::create('voucher_settings', function (Blueprint $table) {
             $table->id(); // Auto-incrementing primary key
             $table->foreignId('voucher_profile_id')->constrained('voucher_profiles')->onDelete('cascade'); // Foreign key to 'voucher_profiles' table
-            $table->foreignId('partner_type_id')->constrained('partner_types')->onDelete('cascade'); // Foreign key to 'partner_types' table
-            $table->integer('price_points'); // Points required for the price
+            $table->boolean('issueVoucher'); // Whether to issue the voucher
+            $table->boolean('displayStock'); // Whether to display the stock
+            $table->integer('maxPurchasePerTx'); // Maximum purchases per transaction
+            $table->string('linkToGenerateVoucher'); // Link to generate the voucher
             $table->timestamps(); // Created at and updated at timestamps
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('voucher_partner_prices');
+        Schema::dropIfExists('voucher_settings');
     }
 };

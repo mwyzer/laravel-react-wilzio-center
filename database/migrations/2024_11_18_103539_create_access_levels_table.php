@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_billings', function (Blueprint $table) {
+        Schema::create('access_levels', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade'); // Foreign key for services table
-            $table->date('billing_month'); // A date column to represent the billing month
-            $table->decimal('amount', 15, 2); // Amount column with precision
+            $table->string('name'); // Name of the access level
             $table->timestamps(); // Created at and updated at timestamps
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_billings');
+        Schema::dropIfExists('access_levels');
     }
 };

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('daily_sales', function (Blueprint $table) {
             $table->id();
-            $table->locationId();
-            $table->salesDate();
-            $table->incomeAmount();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->timestamp('sales_date');
+            $table->integer('income_amount');
             $table->timestamps();
         });
     }

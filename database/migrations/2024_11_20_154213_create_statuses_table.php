@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_access_permissions', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->partnerTypeId();
-            $table->customerDataCategoryId();
-            $table->accessLevelId();
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer_data_access_permissions');
+        Schema::dropIfExists('statuses');
     }
 };

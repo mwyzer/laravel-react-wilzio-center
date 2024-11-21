@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('location_services', function (Blueprint $table) {
             $table->id();
-            $table->locationId();
-            $table->serviceTypeId();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->integer('service_period');
+            $table->boolean('available');
             $table->timestamps();
         });
     }

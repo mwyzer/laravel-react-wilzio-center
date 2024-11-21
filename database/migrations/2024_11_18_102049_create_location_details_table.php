@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('location_details', function (Blueprint $table) {
-            $table->id();
-            $table->locationId();
-            $table->initialInstallationDate();
-            $table->googleMapUrl();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade'); // Foreign key for locations
+            $table->date('initial_installation_date')->nullable(); // Installation date
+            $table->string('google_map_url')->nullable(); // Google Map URL
+            $table->timestamps(); // Created and updated timestamps
         });
     }
 

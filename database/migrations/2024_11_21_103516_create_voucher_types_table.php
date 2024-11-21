@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_sales', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->timestamp('sales_month');
-            $table->integer('income_amount');
-            $table->timestamps();
+        Schema::create('voucher_types', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing primary key
+            $table->string('name'); // Name of the voucher type
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_sales');
+        Schema::dropIfExists('voucher_types');
     }
 };

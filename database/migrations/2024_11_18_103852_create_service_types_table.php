@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_sales', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->timestamp('sales_month');
-            $table->integer('income_amount');
-            $table->timestamps();
+        Schema::create('service_types', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing primary key
+            $table->string('name'); // VARCHAR(255), NOT NULL
+            $table->timestamps(); // Adds created_at and updated_at columns
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_sales');
+        Schema::dropIfExists('service_types');
     }
 };

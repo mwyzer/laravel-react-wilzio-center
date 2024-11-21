@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_sales', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->timestamp('sales_month');
-            $table->integer('income_amount');
-            $table->timestamps();
+        Schema::create('customer_data_categories', function (Blueprint $table) {
+            $table->id(); // Primary key
+            $table->string('name')->nullable(false); // Name of the data category
+            $table->timestamps(); // Timestamps for created_at and updated_at
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('monthly_sales');
+        Schema::dropIfExists('customer_data_categories');
     }
 };

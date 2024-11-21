@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stocks', function (Blueprint $table) {
+        Schema::create('voucher_import_scripts', function (Blueprint $table) {
             $table->id();
-            $table->string('stockName');
-            $table->unsignedBigInteger('location_id'); // Use unsignedBigInteger for foreign key
             $table->timestamps();
-
-            // Add foreign key constraint
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stocks');
+        Schema::dropIfExists('voucher_import_scripts');
     }
 };

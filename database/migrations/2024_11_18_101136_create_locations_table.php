@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->string('name')->index(); // Name of the location with indexing for faster searches
-            $table->string('address'); // Address of the location
+            $table->text('address'); // Address of the location
             $table->timestamps(); // Created at and updated at timestamps
         });
     }
