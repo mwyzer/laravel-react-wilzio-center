@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('membership_rewards', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->foreignId('membership_level_id')->constrained('membership_levels')->onDelete('cascade'); // Foreign key for membership levels
-            $table->foreignId('reward_type_id')->constrained('reward_types')->onDelete('cascade'); // Foreign key for reward types
-            $table->integer('bonus_points'); // Bonus points for the reward
-            $table->decimal('nominal_required', 15, 2); // Nominal amount required to qualify for the reward
-            $table->integer('applies_every')->nullable(); // Applies every 'X' times (e.g., every 5 transactions)
+            $table->foreignId('membershipLevelId')->constrained('memberships')->onDelete('cascade'); // Foreign key for memberships
+            $table->foreignId('rewardTypeId')->constrained('reward_types')->onDelete('cascade'); // Foreign key for reward types
+            $table->unsignedInteger('bonusPoints')->nullable(); // Bonus points
+            $table->decimal('nominalRequired', 10, 2)->nullable(); // Nominal required
+            $table->string('appliesEvery', 255)->nullable(); // Applies every (e.g., "month", "year")
             $table->timestamps(); // Created at and updated at timestamps
+            $table->softDeletes(); // Soft delete column
         });
     }
 

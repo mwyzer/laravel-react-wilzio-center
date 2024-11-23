@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('membership_levels', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('voucher_types', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing primary key
+            $table->string('name', 255); // Name of the voucher type
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('membership_levels');
+        Schema::dropIfExists('voucher_types');
     }
 };

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->method();
-            $table->name();
-            $table->link();
-            $table->phoneNumber();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->string('method', 255); // Contact method (e.g., email, WhatsApp)
+            $table->string('name', 255); // Name of the contact
+            $table->string('link', 255)->nullable(); // Link (e.g., social media profile, website)
+            $table->string('phoneNumber', 255)->nullable(); // Phone number
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 

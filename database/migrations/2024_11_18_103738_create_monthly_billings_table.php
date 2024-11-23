@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Primary key
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade'); // Foreign key for services table
             $table->date('billing_month'); // A date column to represent the billing month
-            $table->decimal('amount', 15, 2); // Amount column with precision
+            $table->integer('amount'); // Amount column with precision
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

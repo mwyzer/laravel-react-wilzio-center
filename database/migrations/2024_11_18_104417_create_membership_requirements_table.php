@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('membership_requirements', function (Blueprint $table) {
-            $table->id();
-            $table->membershipLevelId();
-            $table->requirementType();
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('membershipLevelId')->constrained('membership_levels')->onDelete('cascade'); // Foreign key for membership levels
+            $table->string('requirementName', 255); // Requirement name
+            $table->text('description')->nullable(); // Description of the requirement
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 

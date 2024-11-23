@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MembershipLevel extends Model
 {
-    //
-    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['levelName', 'description', 'minSpending'];
 
-    public function customers()
+    public function rewards()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasMany(MembershipReward::class, 'membershipLevelId');
+    }
+
+    public function requirements()
+    {
+        return $this->hasMany(MembershipRequirement::class, 'membershipLevelId');
     }
 }

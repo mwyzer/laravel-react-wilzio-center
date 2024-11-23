@@ -4,28 +4,39 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateChangeHistoryDataAccessPermissionsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('change_history_data_access_permissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_type_id')->constrained()->onDelete('cascade'); // Foreign key to partner_types
-            $table->foreignId('change_history_data_category_id')->constrained()->onDelete('cascade'); // Foreign key to change_history_data_categories
-            $table->foreignId('access_level_id')->constrained()->onDelete('cascade'); // Foreign key to access_levels
-            $table->timestamps(); // Created at and updated at timestamps
-            $table->timestamp('deleted_at')->nullable(); // Soft delete timesta
+
+            // Foreign key for change_history_data_category_id
+            $table->unsignedBigInteger('change_history_data_category_id');
+            $table->foreign('change_history_data_category_id', 'ch_data_category_fk')
+                ->references('id')
+                ->on('change_history_data_categories')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('partnerTypeId');
+            $table->foreign('partnerTypeId', 'partner_type_fk')
+                ->references('id')
+                ->on('partner_types')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('accessLevelId');
+            $table->foreign('accessLevelId', 'access_level_fk')
+                ->references('id')
+                ->on('access_levels')
+                ->onDelete('cascade');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('change_history_data_access_permissions');
     }
-};
+}

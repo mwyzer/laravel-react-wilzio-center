@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bonus_settings', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->foreignId('partner_type_id') // Foreign key for partner types
-                ->constrained('partner_types')
-                ->onDelete('cascade');
-            $table->enum('bonus_type', ['percentage', 'fixed'])->default('percentage'); // Bonus type
-            $table->boolean('enabled')->default(true); // Whether the bonus is enabled
-            $table->integer('points')->nullable(); // Points required
-            $table->integer('nominal_required')->nullable(); // Nominal amount required
-            $table->integer('applies_every')->nullable(); // Applies every X days, points, etc.
-            $table->timestamps(); // Created and updated timestamps
-        });
+        if (!Schema::hasTable('bonus_settings')) {
+            Schema::create('bonus_settings', function (Blueprint $table) {
+                $table->id(); // Primary key
+                $table->foreignId('partner_type_id')->constrained('partner_types')->onDelete('cascade'); // Foreign key
+                $table->string('bonusType', 255);
+                $table->boolean('enabled')->default(true);
+                $table->integer('points');
+                $table->integer('nominalRequired');
+                $table->string('appliesEvery', 255);
+                $table->timestamps(); // Created at and updated at
+                $table->softDeletes(); // Deleted at
+            });
+        }
     }
 
     /**

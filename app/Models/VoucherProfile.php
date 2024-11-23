@@ -26,6 +26,12 @@ class VoucherProfile extends Model
         'warning_stock_critical',
     ];
 
+    public function voucherMemberPrices()
+    {
+        return $this->hasMany(VoucherMemberPrice::class, 'voucherProfileId');
+    }
+
+
     // Optionally, define relationships if needed
     public function voucherType()
     {

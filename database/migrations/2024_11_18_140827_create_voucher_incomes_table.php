@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('voucher_incomes', function (Blueprint $table) {
             $table->id(); // Auto-incrementing primary key
             $table->foreignId('voucher_type_id')->constrained('voucher_types')->onDelete('cascade'); // Foreign key to 'voucher_types' table
-            $table->decimal('income', 15, 2); // Numeric income value
+            $table->integer('income'); // Numeric income value
             $table->integer('points'); // Points associated with the voucher income
             $table->timestamp('createdAt'); // Timestamp of when the income was created
             $table->timestamps(); // Created at and updated at timestamps

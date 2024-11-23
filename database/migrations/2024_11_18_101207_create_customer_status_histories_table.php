@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('customer_status_histories', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade'); // Foreign key for customers
-            $table->enum('status', ['active', 'inactive', 'suspended']);
+            $table->foreignId('customerId')->constrained('customers')->onDelete('cascade'); // Foreign key for customers
+            $table->string('status', 255); // Customer status
+            $table->timestamp('changedAt')->nullable(); // Status change timestamp
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

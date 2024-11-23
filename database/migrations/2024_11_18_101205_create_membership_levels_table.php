@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('membership_levels', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('name'); // Name of the membership level
-            $table->text('description')->nullable(); // Optional description of the level
-            $table->integer('min_spending'); // Changed to integer
-            $table->timestamps(); // Created at and updated at timestamps
-        });
+        if (!Schema::hasTable('membership_levels')) {
+            Schema::create('membership_levels', function (Blueprint $table) {
+                $table->id(); // Primary key
+                $table->string('name'); // Name of the membership level
+                $table->text('description')->nullable(); // Optional description
+                $table->integer('min_spending'); // Changed to integer
+                $table->timestamps(); // Created at and updated at timestamps
+            });
+        }
     }
 
     /**
@@ -28,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('membership_levels');
     }
 };
+
